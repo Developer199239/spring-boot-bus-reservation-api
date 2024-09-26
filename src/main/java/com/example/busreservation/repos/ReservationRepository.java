@@ -11,5 +11,9 @@ import java.util.Optional;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     Optional<List<Reservation>> findByCustomer(Customer customer);
     Optional<List<Reservation>> findByBusScheduleAndDepartureDate(BusSchedule busSchedule, String departureDate);
+    Optional<Reservation> findByCustomerAndBusScheduleAndDepartureDate(
+            Customer customer,
+            BusSchedule busSchedule,
+            String departureDate);
 
 }

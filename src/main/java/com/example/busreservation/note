@@ -1,0 +1,1 @@
+https://bcrypt-generator.com/

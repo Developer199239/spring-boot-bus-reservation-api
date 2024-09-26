@@ -16,11 +16,13 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-    @OneToOne
-    @JoinColumn(name = "bus_schedule_id")
+
+    @ManyToOne
+    @JoinColumn(name = "bus_schedule_id", nullable = false)
     private BusSchedule busSchedule;
     private Long timestamp;
     private String departureDate;
