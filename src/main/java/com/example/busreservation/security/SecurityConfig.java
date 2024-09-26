@@ -32,13 +32,16 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Explicitly disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,
-                                "/api/bus/add",
-                                "api/schedule/add",
-                                "api/route/add").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/reservation/add").permitAll()
+                                .requestMatchers(HttpMethod.GET).permitAll()
+                                .requestMatchers("/api/auth/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/city/all").permitAll()
+                                .requestMatchers(HttpMethod.POST,
+                                        "/api/bus/add",
+                                        "api/schedule/add",
+                                        "api/route/add", "api/city/add").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/api/city/**").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/api/city/**").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/api/reservation/add").permitAll()
                 )
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
