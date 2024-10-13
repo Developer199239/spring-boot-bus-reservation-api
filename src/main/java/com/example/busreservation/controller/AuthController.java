@@ -1,6 +1,8 @@
 package com.example.busreservation.controller;
+
 import com.example.busreservation.entities.AppUsers;
 import com.example.busreservation.models.AuthResponseModel;
+import com.example.busreservation.repos.AppUserRepository;
 import com.example.busreservation.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,12 +38,21 @@ public class AuthController {
                 ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtTokenProvider.generateToken(authentication);
+        String role = authentication.getAuthorities().stream()
+                .findFirst()
+                .map(grantedAuthority -> grantedAuthority.getAuthority())
+                .orElse("");
+        if (role.startsWith("ROLE_")) {
+            role = role.substring(5);  // Removes the "ROLE_" part
+        }
+
         authResponseModel = new AuthResponseModel(
                 HttpStatus.OK.value(),
                 "Sucessfully logged in",
                 token,
                 System.currentTimeMillis(),
-                expiration
+                expiration,
+                role
         );
         return ResponseEntity.ok(authResponseModel);
     }

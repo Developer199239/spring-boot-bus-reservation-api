@@ -47,13 +47,13 @@ public class JwtTokenProvider {
                     .parse(token);
             return true;
         } catch (MalformedJwtException e) {
-            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Invalid Token");
+            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Invalid Token: " + e.getMessage());
         } catch (ExpiredJwtException e) {
-            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Token Expired");
+            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Token Expired: " + e.getMessage());
         } catch (UnsupportedJwtException e) {
-            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Unsupported token");
+            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Unsupported Token: " + e.getMessage());
         } catch (IllegalArgumentException e) {
-            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Invalid argument");
+            throw new ReservationApiException(HttpStatus.BAD_REQUEST, "Invalid argument: " + e.getMessage());
         }
     }
 

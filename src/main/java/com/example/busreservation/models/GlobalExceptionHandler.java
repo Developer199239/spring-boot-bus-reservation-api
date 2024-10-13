@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
         errorDetails.setErrorMessage(exception.getLocalizedMessage());
         errorDetails.setDevErrorMessage(request.getDescription(false));
         errorDetails.setTimestamp(System.currentTimeMillis());
+        System.out.print("========enter1");
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
@@ -31,9 +32,11 @@ public class GlobalExceptionHandler {
             WebRequest request
     ) {
         final ErrorDetails errorDetails = new ErrorDetails();
-        errorDetails.setErrorMessage(exception.getLocalizedMessage());
+        errorDetails.setErrorCode(HttpStatus.UNAUTHORIZED.value());
+        errorDetails.setErrorMessage("Access denied. You are not authorized to access this resource.");
         errorDetails.setDevErrorMessage(request.getDescription(false));
         errorDetails.setTimestamp(System.currentTimeMillis());
+        System.out.print("========enter2");
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
 
@@ -47,6 +50,7 @@ public class GlobalExceptionHandler {
         errorDetails.setErrorMessage("Duplicate entry or constraint violation occurred.");
         errorDetails.setDevErrorMessage(request.getDescription(false));
         errorDetails.setTimestamp(System.currentTimeMillis());
+        System.out.print("========enter3");
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT); // Use HTTP 409 Conflict
     }
 
@@ -59,6 +63,7 @@ public class GlobalExceptionHandler {
         errorDetails.setErrorMessage(exception.getLocalizedMessage());
         errorDetails.setDevErrorMessage(request.getDescription(false));
         errorDetails.setTimestamp(System.currentTimeMillis());
+        System.out.print("========enter4");
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

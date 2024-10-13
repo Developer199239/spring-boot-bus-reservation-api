@@ -13,4 +13,10 @@ public class ErrorDetails {
     private String errorMessage;
     private String devErrorMessage;
     private Long timestamp;
+
+    public String toJson() {
+        return "{\"errorCode\": " + errorCode + ", \"errorMessage\": \"" + errorMessage +
+                "\", \"devErrorMessage\": \"" + devErrorMessage + "\", \"timestamp\": " + timestamp + "}";
+    }
+
 }
