@@ -1,6 +1,7 @@
 package com.example.busreservation.controller;
 
 import com.example.busreservation.entities.BusRoute;
+import com.example.busreservation.entities.City;
 import com.example.busreservation.models.ResponseModel;
 import com.example.busreservation.services.BusRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class BusRouteController {
             @RequestParam String cityTo
     ) {
         return ResponseEntity.ok(busRouteService.getRouteByCityFromAndCityTo(cityFrom, cityTo));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseModel<BusRoute> updateRoute(@PathVariable Long id, @RequestBody BusRoute busRoute) {
+        final BusRoute updateBusRoute = busRouteService.updateBusRoute(id, busRoute);
+        return new ResponseModel<>(HttpStatus.OK.value(), "BusRoute updated", updateBusRoute);
     }
 }
 
