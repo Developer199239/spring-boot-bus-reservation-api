@@ -1,6 +1,7 @@
 package com.example.busreservation.controller;
 
 import com.example.busreservation.entities.Bus;
+import com.example.busreservation.entities.City;
 import com.example.busreservation.models.ResponseModel;
 import com.example.busreservation.services.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,17 @@ public class BusController {
     @GetMapping("/all")
     public ResponseEntity<List<Bus>> getAllBus() {
         return ResponseEntity.ok(busService.getAllBus());
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseModel<Bus> updateBus(@PathVariable Long id, @RequestBody Bus bus) {
+        final Bus updatedBus = busService.updateBus(id, bus);
+        return new ResponseModel<>(HttpStatus.OK.value(), "Bus updated", updatedBus);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseModel<Void> deleteCity(@PathVariable Long id) {
+        busService.deleteBus(id);
+        return new ResponseModel<>(HttpStatus.OK.value(), "Bus deleted", null);
     }
 }

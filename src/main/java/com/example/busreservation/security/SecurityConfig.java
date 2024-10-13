@@ -39,8 +39,8 @@ public class SecurityConfig {
                                         "/api/bus/add",
                                         "api/schedule/add",
                                         "api/route/add", "api/city/add").authenticated()
-                                .requestMatchers(HttpMethod.PUT, "/api/city/**").authenticated()
-                                .requestMatchers(HttpMethod.DELETE, "/api/city/**").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/api/city/**","/api/bus/**").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/api/city/**","/api/bus/**").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/api/reservation/add").permitAll()
                 )
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtEntryPoint))
