@@ -39,7 +39,7 @@ public class SecurityConfig {
                                         "/api/bus/add",
                                         "api/schedule/add",
                                         "api/route/add", "api/city/add").authenticated()
-                                .requestMatchers(HttpMethod.PUT, "/api/city/**","/api/bus/**","/api/route/**").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/api/city/**","/api/bus/**","/api/route/**","/api/schedule/**").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/api/city/**","/api/bus/**").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/api/reservation/add").permitAll()
                 )

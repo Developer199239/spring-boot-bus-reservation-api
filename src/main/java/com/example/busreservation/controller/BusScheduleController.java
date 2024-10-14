@@ -1,6 +1,7 @@
 package com.example.busreservation.controller;
 
 import com.example.busreservation.entities.BusSchedule;
+import com.example.busreservation.entities.City;
 import com.example.busreservation.models.ResponseModel;
 import com.example.busreservation.services.BusScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,11 @@ public class BusScheduleController {
     @GetMapping("/{routeName}")
     public ResponseEntity<List<BusSchedule>> getBusScheduleByRouteName(@PathVariable(name = "routeName") String routeName) {
         return ResponseEntity.ok(busScheduleService.getSchedulesByRoute(routeName));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseModel<BusSchedule> updateCity(@PathVariable Long id, @RequestBody BusSchedule busSchedule) {
+        final BusSchedule updatedBusSchedule = busScheduleService.updateBusSchedule(id, busSchedule);
+        return new ResponseModel<>(HttpStatus.OK.value(), "BusSchedule updated", updatedBusSchedule);
     }
 }
