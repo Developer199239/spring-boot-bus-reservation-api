@@ -1,9 +1,13 @@
 package com.example.busreservation.controller;
 
 import com.example.busreservation.entities.AppUsers;
+import com.example.busreservation.entities.Customer;
 import com.example.busreservation.models.AuthResponseModel;
-import com.example.busreservation.repos.AppUserRepository;
+import com.example.busreservation.models.ResponseModel;
+import com.example.busreservation.models.SignUpRequestModel;
+import com.example.busreservation.models.SignUpResponseModel;
 import com.example.busreservation.security.JwtTokenProvider;
+import com.example.busreservation.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -12,10 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,6 +29,9 @@ public class AuthController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private AppUserService appUserService;
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseModel> login(@RequestBody AppUsers user) {
@@ -55,6 +59,17 @@ public class AuthController {
                 role
         );
         return ResponseEntity.ok(authResponseModel);
+    }
+
+    @PostMapping("/signup")
+    public ResponseModel<SignUpResponseModel> signup(@RequestBody SignUpRequestModel signUpRequestModel) {
+        appUserService.signupUser(signUpRequestModel);
+        return new ResponseModel<>(HttpStatus.OK.value(), "Signup success", null);
+    }
+
+    @GetMapping("/{userName}")
+    public ResponseEntity<Customer> getCustomer(@PathVariable(name = "userName") String userName) {
+        return ResponseEntity.ok(appUserService.getCustomerInfo(userName));
     }
 }
 

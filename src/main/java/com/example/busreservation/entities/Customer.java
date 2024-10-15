@@ -21,4 +21,5 @@ public class Customer {
     private String mobile;
     @Column(unique = true)
     private String email;
+    private String userName;
 }
