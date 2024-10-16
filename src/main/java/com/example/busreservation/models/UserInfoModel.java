@@ -8,7 +8,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUpResponseModel {
-    private int statusCode;
-    private String message;
+public class UserInfoModel {
+    private String userName;
+    private String password;
+    private String role;
+    private String customerName;
+    private String email;
+    private String mobile;
 }

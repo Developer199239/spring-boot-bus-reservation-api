@@ -5,7 +5,7 @@ import com.example.busreservation.entities.Customer;
 import com.example.busreservation.models.AuthResponseModel;
 import com.example.busreservation.models.ResponseModel;
 import com.example.busreservation.models.SignUpRequestModel;
-import com.example.busreservation.models.SignUpResponseModel;
+import com.example.busreservation.models.UserInfoModel;
 import com.example.busreservation.security.JwtTokenProvider;
 import com.example.busreservation.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,13 +62,13 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseModel<SignUpResponseModel> signup(@RequestBody SignUpRequestModel signUpRequestModel) {
+    public ResponseModel<UserInfoModel> signup(@RequestBody SignUpRequestModel signUpRequestModel) {
         appUserService.signupUser(signUpRequestModel);
         return new ResponseModel<>(HttpStatus.OK.value(), "Signup success", null);
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable(name = "userName") String userName) {
+    public ResponseEntity<UserInfoModel> getCustomer(@PathVariable(name = "userName") String userName) {
         return ResponseEntity.ok(appUserService.getCustomerInfo(userName));
     }
 }

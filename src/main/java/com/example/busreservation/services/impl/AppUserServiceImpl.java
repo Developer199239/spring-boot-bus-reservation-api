@@ -4,6 +4,7 @@ import com.example.busreservation.entities.AppUsers;
 import com.example.busreservation.entities.Customer;
 import com.example.busreservation.models.ReservationApiException;
 import com.example.busreservation.models.SignUpRequestModel;
+import com.example.busreservation.models.UserInfoModel;
 import com.example.busreservation.repos.AppUserRepository;
 import com.example.busreservation.repos.CustomerRepository;
 import com.example.busreservation.services.AppUserService;
@@ -50,8 +51,18 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public Customer getCustomerInfo(String userName) {
-        return customerRepository.findByUserName(userName)
+    public UserInfoModel getCustomerInfo(String userName) {
+        AppUsers appUsers = appUserRepository.findByUserName(userName).orElseThrow(() -> new ReservationApiException(HttpStatus.NOT_FOUND, "User not found"));
+        Customer customer =  customerRepository.findByUserName(userName)
                 .orElseThrow(() -> new ReservationApiException(HttpStatus.NOT_FOUND, "Customer username not found"));
+
+        UserInfoModel infoModel = new UserInfoModel();
+        infoModel.setUserName(appUsers.getUserName());
+        infoModel.setPassword(appUsers.getPassword());
+        infoModel.setRole(appUsers.getRole());
+        infoModel.setCustomerName(customer.getCustomerName());
+        infoModel.setEmail(customer.getEmail());
+        infoModel.setMobile(customer.getMobile());
+        return  infoModel;
     }
 }
