@@ -63,6 +63,7 @@ public class AppUserServiceImpl implements AppUserService {
         infoModel.setCustomerName(customer.getCustomerName());
         infoModel.setEmail(customer.getEmail());
         infoModel.setMobile(customer.getMobile());
+        infoModel.setCustomerId(String.valueOf(customer.getCustomerId()));
         return  infoModel;
     }
 }

@@ -15,4 +15,5 @@ public class UserInfoModel {
     private String customerName;
     private String email;
     private String mobile;
+    private String customerId;
 }
