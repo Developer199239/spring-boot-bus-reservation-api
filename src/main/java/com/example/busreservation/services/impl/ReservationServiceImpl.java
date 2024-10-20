@@ -78,57 +78,6 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
-
-//    public Reservation addReservation(Reservation reservation) {
-//        final Customer customer;
-//
-//        // Check if the customer already exists based on mobile or email
-//        final boolean doesCustomerExist = customerRepository
-//                .existsByMobileOrEmail(reservation.getCustomer().getMobile(), reservation.getCustomer().getEmail());
-//
-//        if(doesCustomerExist) {
-//            customer = customerRepository
-//                    .findByMobileOrEmail(reservation.getCustomer().getMobile(), reservation.getCustomer().getEmail())
-//                    .orElseThrow();
-//        } else {
-//            customer = customerRepository.save(reservation.getCustomer());
-//        }
-//
-//        reservation.setCustomer(customer);
-//
-//        // Check if the reservation already exists to avoid a duplicate entry
-//        Optional<Reservation> existingReservation = reservationRepository
-//                .findByCustomerAndBusScheduleAndDepartureDate(
-//                        reservation.getCustomer(),
-//                        reservation.getBusSchedule(),
-//                        reservation.getDepartureDate());
-//
-//        if (existingReservation.isPresent()) {
-//            Reservation existingRes = existingReservation.get();
-//            // Append the new seat numbers to the existing seat numbers (assuming seatNumbers is a comma-separated string)
-//            String existingSeats = existingRes.getSeatNumbers();
-//            String newSeats = reservation.getSeatNumbers();
-//
-//            if (existingSeats != null && !existingSeats.isEmpty()) {
-//                existingSeats += "," + newSeats; // Concatenate new seat numbers
-//            } else {
-//                existingSeats = newSeats; // No previous seats booked
-//            }
-//
-//            existingRes.setSeatNumbers(existingSeats);
-//
-//            // Update the total seats booked and other details if necessary
-//            existingRes.setTotalSeatBooked(existingRes.getTotalSeatBooked() + reservation.getTotalSeatBooked());
-//            existingRes.setTotalPrice(existingRes.getTotalPrice() + reservation.getTotalPrice());
-//
-//            // Save the updated reservation
-//            return reservationRepository.save(existingRes);
-//        }
-//
-//        // If no existing reservation, create a new one
-//        return reservationRepository.save(reservation);
-//    }
-
     @Override
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
@@ -145,9 +94,9 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationsByMobile(String mobile) {
-        final AppUsers appUser = appUserRepository.findByUserName(mobile)
-                .orElseThrow(() -> new ReservationApiException(HttpStatus.BAD_REQUEST, "No record found"));
+    public List<Reservation> getReservationsByUserName(String userName) {
+        final AppUsers appUser = appUserRepository.findByUserName(userName)
+                .orElseThrow(() -> new ReservationApiException(HttpStatus.BAD_REQUEST, "No User found"));
         return reservationRepository.findByAppUser(appUser).orElseThrow(() -> new ReservationApiException(HttpStatus.BAD_REQUEST, "No record found"));
     }
 }

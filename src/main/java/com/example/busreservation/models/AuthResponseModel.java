@@ -16,4 +16,5 @@ public class AuthResponseModel {
     private Long expirationDuration;
     private String role;
     private String userId;
+    private String mobile;
 }

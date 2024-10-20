@@ -58,7 +58,8 @@ public class AuthController {
                 System.currentTimeMillis(),
                 expiration,
                 role,
-                appUserInfo.getUserId()
+                appUserInfo.getUserId(),
+                appUserInfo.getMobile()
         );
         return ResponseEntity.ok(authResponseModel);
     }

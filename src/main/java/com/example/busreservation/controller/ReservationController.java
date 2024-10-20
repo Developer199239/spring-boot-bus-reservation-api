@@ -35,10 +35,10 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.getReservationsByScheduleAndDepartureDate(scheduleId, departureDate));
     }
 
-    @GetMapping("/all/{mobile}")
-    public ResponseEntity<List<Reservation>> getReservationsByMobile(
-            @PathVariable(name = "mobile") String mobile
+    @GetMapping("/all/{userName}")
+    public ResponseEntity<List<Reservation>> getReservationsByUserName(
+            @PathVariable(name = "userName") String userName
     ) {
-        return ResponseEntity.ok(reservationService.getReservationsByMobile(mobile));
+        return ResponseEntity.ok(reservationService.getReservationsByUserName(userName));
     }
 }
