@@ -1,3 +1,32 @@
+# Bus Reservation API
+
+This is a Spring Boot application that provides a RESTful API for managing bus routes, schedules, reservations, and users. It allows users to:
+
+- Add, update, delete, and view bus routes and schedules.
+- Make and manage reservations for bus services.
+- Sign up and authenticate users with JWT-based authentication.
+
+## Tech Stack
+
+- **Java 17**: Programming language used for building the backend.
+- **Spring Boot 3.3.4**: Framework for creating RESTful APIs.
+- **Spring Data JPA**: For ORM and database access.
+- **MySQL**: Relational database used for data storage.
+- **JWT (JSON Web Tokens)**: For secure user authentication.
+- **SpringDoc OpenAPI**: For auto-generating API documentation with Swagger.
+
+## Features
+
+- Manage bus routes, schedules, and reservations.
+- User authentication and authorization.
+- Full CRUD support for buses, routes, and reservations.
+- RESTful API following OpenAPI 3.0 specification.
+- Integrated Swagger UI for interactive API documentation.
+
+---
+
+
+
 ### **Basic Project Information**
 - Title: `Bus Reservation API`
 - Version: `v0`
