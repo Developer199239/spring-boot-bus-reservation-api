@@ -18,8 +18,8 @@ public class Reservation {
     private Long reservationId;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUsers appUser;
 
     @ManyToOne
     @JoinColumn(name = "bus_schedule_id", nullable = false)
@@ -30,4 +30,19 @@ public class Reservation {
     private String seatNumbers;
     private String reservationStatus;
     private Integer totalPrice;
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "reservationId=" + reservationId +
+                ", appUser=" + appUser +
+                ", busSchedule=" + busSchedule +
+                ", timestamp=" + timestamp +
+                ", departureDate='" + departureDate + '\'' +
+                ", totalSeatBooked=" + totalSeatBooked +
+                ", seatNumbers='" + seatNumbers + '\'' +
+                ", reservationStatus='" + reservationStatus + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

@@ -19,5 +19,10 @@ public class AppUsers {
     private String userName;
     private String password;
     private String role;
+    private String customerName;
+    @Column(unique = true)
+    private String mobile;
+    @Column(unique = true)
+    private String email;
 }
 

@@ -15,4 +15,5 @@ public class AuthResponseModel {
     private Long loginTime;
     private Long expirationDuration;
     private String role;
+    private String userId;
 }

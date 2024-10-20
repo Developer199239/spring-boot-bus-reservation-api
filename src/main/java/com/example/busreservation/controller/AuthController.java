@@ -1,7 +1,6 @@
 package com.example.busreservation.controller;
 
 import com.example.busreservation.entities.AppUsers;
-import com.example.busreservation.entities.Customer;
 import com.example.busreservation.models.AuthResponseModel;
 import com.example.busreservation.models.ResponseModel;
 import com.example.busreservation.models.SignUpRequestModel;
@@ -50,13 +49,16 @@ public class AuthController {
             role = role.substring(5);  // Removes the "ROLE_" part
         }
 
+        UserInfoModel appUserInfo = appUserService.getCustomerInfo(user.getUserName());
+
         authResponseModel = new AuthResponseModel(
                 HttpStatus.OK.value(),
                 "Sucessfully logged in",
                 token,
                 System.currentTimeMillis(),
                 expiration,
-                role
+                role,
+                appUserInfo.getUserId()
         );
         return ResponseEntity.ok(authResponseModel);
     }

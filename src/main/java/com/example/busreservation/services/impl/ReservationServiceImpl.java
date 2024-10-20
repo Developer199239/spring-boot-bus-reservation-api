@@ -1,11 +1,11 @@
 package com.example.busreservation.services.impl;
 
+import com.example.busreservation.entities.AppUsers;
 import com.example.busreservation.entities.BusSchedule;
-import com.example.busreservation.entities.Customer;
 import com.example.busreservation.entities.Reservation;
 import com.example.busreservation.models.ReservationApiException;
+import com.example.busreservation.repos.AppUserRepository;
 import com.example.busreservation.repos.BusScheduleRepository;
-import com.example.busreservation.repos.CustomerRepository;
 import com.example.busreservation.repos.ReservationRepository;
 import com.example.busreservation.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +19,26 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
     private BusScheduleRepository busScheduleRepository;
+    @Autowired
+    private AppUserRepository appUserRepository;
     @Override
     public Reservation addReservation(Reservation reservation) {
-        // Try to fetch the customer by mobile or email in a single database call
-        Customer customer = customerRepository
-                .findByMobileOrEmail(reservation.getCustomer().getMobile(), reservation.getCustomer().getEmail())
-                .orElseGet(() -> customerRepository.save(reservation.getCustomer()));
+        System.out.println("==========add reservation========= getting....");
+        System.out.println(reservation.toString());
 
-        reservation.setCustomer(customer);
+        AppUsers appUsers = appUserRepository.findByUserName(reservation.getAppUser().getUserName()).orElseThrow(() -> new ReservationApiException(HttpStatus.NOT_FOUND, "User not found"));
+
+        System.out.println("==========add reservation=========");
+        System.out.println(appUsers.toString());
+        reservation.setAppUser(appUsers);
+
+        System.out.println(reservation.toString());
 
         // Check if the reservation already exists for the customer, bus schedule, and departure date
         Optional<Reservation> existingReservation = reservationRepository
-                .findByCustomerAndBusScheduleAndDepartureDate(
-                        reservation.getCustomer(),
+                .findByAppUserAndBusScheduleAndDepartureDate(
+                        reservation.getAppUser(),
                         reservation.getBusSchedule(),
                         reservation.getDepartureDate());
 
@@ -142,10 +146,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> getReservationsByMobile(String mobile) {
-        final Customer customer = customerRepository
-                .findByMobile(mobile)
+        final AppUsers appUser = appUserRepository.findByUserName(mobile)
                 .orElseThrow(() -> new ReservationApiException(HttpStatus.BAD_REQUEST, "No record found"));
-        return reservationRepository.findByCustomer(customer).orElseThrow(() -> new ReservationApiException(HttpStatus.BAD_REQUEST, "No record found"));
+        return reservationRepository.findByAppUser(appUser).orElseThrow(() -> new ReservationApiException(HttpStatus.BAD_REQUEST, "No record found"));
     }
 }
 
