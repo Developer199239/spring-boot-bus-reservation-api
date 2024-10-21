@@ -224,3 +224,19 @@ Example of a response model used throughout the API:
 4. **Reservations**: Make reservations for a given schedule and view or cancel them.
 
 ---
+
+#### FrontEnd (Flutter)
+
+Clone the backend repository:
+
+[https://github.com/Developer199239/flutter_bus_reservation.git](https://github.com/Developer199239/flutter_bus_reservation.git)
+
+## Contributing
+
+We welcome contributions from developers who want to improve the project! To contribute:
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-name`.
+3. Make your changes and commit them: `git commit -m 'Added feature-name'`.
+4. Push to the branch: `git push origin feature-name`.
+5. Open a Pull Request.   
