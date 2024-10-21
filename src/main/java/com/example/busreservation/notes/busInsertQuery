@@ -1,5 +1,5 @@
 INSERT INTO `bus_reservation`.`bus` (`bus_name`,`bus_number`,`bus_type`,`total_seat`) VALUES
-('Ritu Paribahan','ritu-01','AC-BUSINESS','18'),
+('Test Paribahan','test-01','AC-BUSINESS','18'),
 ('Hanif Paribahan','hanif-01','AC-BUSINESS','20'),
 ('Nabil Paribahan', 'nabil-paribahan-01', 'SEMI-SLEEPER', '28'),
 ('Bablu Paribahan', 'bablu-paribahan-01', 'AC-BUSINESS', '29'),
