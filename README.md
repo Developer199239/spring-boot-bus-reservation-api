@@ -227,7 +227,7 @@ Example of a response model used throughout the API:
 
 #### FrontEnd (Flutter)
 
-Clone the backend repository:
+Clone the FrontEnd repository:
 
 [https://github.com/Developer199239/flutter_bus_reservation.git](https://github.com/Developer199239/flutter_bus_reservation.git)
 
